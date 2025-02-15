@@ -4,14 +4,6 @@ A Kotlin-based library for interacting with the SpaceX API on the JVM platform. 
 
 ---
 
-## ✅ Build Status
-
-Check the build status in the GitHub repository badge above! We ensure the quality and reliability of the code by
-running continuous integration tests. Contributions to improve the project are always welcome!
-
-[![Build](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
----
-
 ## ✨ Features
 
 - Simple and intuitive Kotlin API for SpaceX 🚀
@@ -36,7 +28,12 @@ val capsules = client.capsules.allCapsules()
 println(capsules)
 ```
 
-## ✅ Testing
+## ✅ Build Status & Testing
+
+Check the build status in the GitHub repository badge above! We ensure the quality and reliability of the code by
+running continuous integration tests. Contributions to improve the project are always welcome!
+
+[![Build](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
 
 Run tests with:
 
@@ -44,15 +41,13 @@ Run tests with:
 ./gradlew test
 ```
 
-Check code coverage results in the GitHub repository badge above! 📊
-
 ## 🤝 Contributing
 
 Contributions are welcome! Open issues, create pull requests, and help improve the project.
 
 ## 🧑‍💻 Author
 
-Created by [Matej Vana](https://github.com/Acerik) 👨‍🚀
+Created by [Matěj Váňa](https://github.com/Acerik) 👨‍🚀
 
 ---
 
