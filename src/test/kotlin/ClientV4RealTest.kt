@@ -4,6 +4,7 @@ import cz.matejvana.spacexkotapi.v4.capsules.CapsuleDto
 import cz.matejvana.spacexkotapi.v4.cores.CoreDto
 import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
+import cz.matejvana.spacexkotapi.v4.history.HistoryDto
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -142,6 +143,36 @@ class ClientV4RealTest {
     @Test
     fun `query dragon test`() {
         val pagination: PaginatedResponse<DragonDto> = clientV4.dragons.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+    
+    @Test
+    fun `allHistory returns non-empty list of history`() {
+        val history: List<HistoryDto> = clientV4.history.getAll()
+
+        assertTrue(history.isNotEmpty())
+
+        assertNotNull(history[0].title)
+    }
+
+    @Test
+    fun `historyById returns history (history id is from allHistory)`() {
+        val history: List<HistoryDto> = clientV4.history.getAll()
+
+        assertTrue(history.isNotEmpty())
+
+        assertNotNull(history[0].title)
+
+        val historyItem: HistoryDto = clientV4.history.getById(history[0].id)
+
+        assertNotNull(historyItem)
+        assertEquals(history[0].title, historyItem.title)
+    }
+
+    @Test
+    fun `query history test`() {
+        val pagination: PaginatedResponse<HistoryDto> = clientV4.history.query(mapOf("limit" to 1))
 
         assertTrue(pagination.docs.isNotEmpty())
     }
