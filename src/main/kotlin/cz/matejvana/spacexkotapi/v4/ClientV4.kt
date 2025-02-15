@@ -4,7 +4,7 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import cz.matejvana.spacexkotapi.SpaceXClient
 import cz.matejvana.spacexkotapi.request.GetRequest
 import cz.matejvana.spacexkotapi.v4.capsules.CapsuleDto
-import cz.matejvana.spacexkotapi.v4.capsules.CompanyApi
+import cz.matejvana.spacexkotapi.v4.company.CompanyApi
 import java.net.http.HttpClient
 
 class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
