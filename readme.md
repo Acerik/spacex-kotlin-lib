@@ -10,7 +10,7 @@ Check code coverage results in the GitHub repository badge above! We track code 
 reliability of the code. Contributions to improve test coverage are always welcome!
 
 [![Build](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
-[![Code Coverage](https://github.com/Acerik/spacex-kot-api/raw/main/.github/badges/jacoco.svg)](https://github.com/Acerik/spacex-kot-api)
+[![Code Coverage](https://github.com/Acerik/spacex-kot-api/raw/ci-results/.github/badges/jacoco.svg)](https://github.com/Acerik/spacex-kot-api)
 
 ---
 
