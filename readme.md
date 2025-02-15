@@ -4,14 +4,12 @@ A Kotlin-based library for interacting with the SpaceX API on the JVM platform. 
 
 ---
 
-## 📊 Code Coverage
+## ✅ Build Status
 
-Check code coverage results in the GitHub repository badge above! We track code coverage to ensure the quality and
-reliability of the code. Contributions to improve test coverage are always welcome!
+Check the build status in the GitHub repository badge above! We ensure the quality and reliability of the code by
+running continuous integration tests. Contributions to improve the project are always welcome!
 
 [![Build](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
-[![Code Coverage](https://github.com/Acerik/spacex-kot-api/raw/ci-results/.github/badges/jacoco.svg)](https://github.com/Acerik/spacex-kot-api)
-
 ---
 
 ## ✨ Features
