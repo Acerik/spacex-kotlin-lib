@@ -2,6 +2,7 @@ package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
 import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.Images
 import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +13,7 @@ class LandPadsIT {
     @Test
     fun testAllLandingPadsSuccess() {
         val client = mockk<ClientV4>()
-        every { client.landpads.getAll() } returns listOf(
+        every { client.landPads.getAll() } returns listOf(
             LandingPadDto(
                 "id",
                 "name",
@@ -28,7 +29,7 @@ class LandPadsIT {
                 "wikipedia",
                 "details",
                 emptyList(),
-                LandingPadDto.Images(listOf("image1", "image2"))
+                Images(listOf("image1", "image2"))
             ),
             LandingPadDto(
                 "id2",
@@ -45,11 +46,11 @@ class LandPadsIT {
                 "wikipedia2",
                 "details2",
                 emptyList(),
-                LandingPadDto.Images(listOf("image3", "image4"))
+                Images(listOf("image3", "image4"))
             )
         )
 
-        val landingPads = client.landpads.getAll()
+        val landingPads = client.landPads.getAll()
         assertTrue(landingPads.isNotEmpty())
         assertEquals(2, landingPads.size)
         assertEquals("id", landingPads[0].id)
@@ -88,20 +89,20 @@ class LandPadsIT {
     @Test
     fun testAllLandingPadsInternetFailure() {
         val client = mockk<ClientV4>()
-        every { client.landpads.getAll() } throws RuntimeException("Internet connection error")
+        every { client.landPads.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.getAll()
+            client.landPads.getAll()
         }
     }
 
     @Test
     fun testAllLandingPads400StatusCode() {
         val client = mockk<ClientV4>()
-        every { client.landpads.getAll() } throws RuntimeException("HTTP 400 Bad Request")
+        every { client.landPads.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.getAll()
+            client.landPads.getAll()
         }
     }
 
@@ -123,11 +124,11 @@ class LandPadsIT {
             "wikipedia",
             "details",
             emptyList(),
-            LandingPadDto.Images(listOf("image1", "image2"))
+            Images(listOf("image1", "image2"))
         )
-        every { client.landpads.getById("id") } returns landingPad
+        every { client.landPads.getById("id") } returns landingPad
 
-        val result = client.landpads.getById("id")
+        val result = client.landPads.getById("id")
         assertNotNull(result)
         assertEquals("id", result.id)
         assertEquals("name", result.name)
@@ -149,20 +150,20 @@ class LandPadsIT {
     @Test
     fun testLandingPadByIdInternetFailure() {
         val client = mockk<ClientV4>()
-        every { client.landpads.getById("id") } throws RuntimeException("Internet connection error")
+        every { client.landPads.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.getById("id")
+            client.landPads.getById("id")
         }
     }
 
     @Test
     fun testLandingPadById400StatusCode() {
         val client = mockk<ClientV4>()
-        every { client.landpads.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
+        every { client.landPads.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.getById("id")
+            client.landPads.getById("id")
         }
     }
 
@@ -186,7 +187,7 @@ class LandPadsIT {
                     "wikipedia",
                     "details",
                     emptyList(),
-                    LandingPadDto.Images(listOf("image1", "image2"))
+                    Images(listOf("image1", "image2"))
                 )
             ),
             totalDocs = 1,
@@ -200,9 +201,9 @@ class LandPadsIT {
             nextPage = null,
             offset = 0
         )
-        every { client.landpads.query(any()) } returns paginatedResponse
+        every { client.landPads.query(any()) } returns paginatedResponse
 
-        val result = client.landpads.query(mapOf("limit" to 1))
+        val result = client.landPads.query(mapOf("limit" to 1))
         assertTrue(result.docs.isNotEmpty())
         assertEquals(1, result.totalDocs)
         assertEquals(1, result.limit)
@@ -235,20 +236,20 @@ class LandPadsIT {
     @Test
     fun testQueryLandingPadsInternetFailure() {
         val client = mockk<ClientV4>()
-        every { client.landpads.query(any()) } throws RuntimeException("Internet connection error")
+        every { client.landPads.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.query(mapOf("limit" to 1))
+            client.landPads.query(mapOf("limit" to 1))
         }
     }
 
     @Test
     fun testQueryLandingPads400StatusCode() {
         val client = mockk<ClientV4>()
-        every { client.landpads.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
+        every { client.landPads.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
-            client.landpads.query(mapOf("limit" to 1))
+            client.landPads.query(mapOf("limit" to 1))
         }
     }
 }

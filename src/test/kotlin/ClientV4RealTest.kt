@@ -180,7 +180,7 @@ class ClientV4RealTest {
 
     @Test
     fun `allLandPads returns non-empty list of landpads`() {
-        val landpads: List<LandingPadDto> = clientV4.landpads.getAll()
+        val landpads: List<LandingPadDto> = clientV4.landPads.getAll()
 
         assertTrue(landpads.isNotEmpty())
 
@@ -189,13 +189,13 @@ class ClientV4RealTest {
 
     @Test
     fun `landpadsById returns landingpads (landing pad id is from allLandPads)`() {
-        val landpads: List<LandingPadDto> = clientV4.landpads.getAll()
+        val landpads: List<LandingPadDto> = clientV4.landPads.getAll()
 
         assertTrue(landpads.isNotEmpty())
 
         assertNotNull(landpads[0].name)
 
-        val landingPadDto: LandingPadDto = clientV4.landpads.getById(landpads[0].id)
+        val landingPadDto: LandingPadDto = clientV4.landPads.getById(landpads[0].id)
 
         assertNotNull(landingPadDto)
         assertEquals(landpads[0].name, landingPadDto.name)
@@ -203,7 +203,37 @@ class ClientV4RealTest {
 
     @Test
     fun `query landpads test`() {
-        val pagination: PaginatedResponse<LandingPadDto> = clientV4.landpads.query(mapOf("limit" to 1))
+        val pagination: PaginatedResponse<LandingPadDto> = clientV4.landPads.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+
+    @Test
+    fun `allLaunchPads returns non-empty list of launchpads`() {
+        val launchpads: List<LaunchPadDto> = clientV4.launchPads.getAll()
+
+        assertTrue(launchpads.isNotEmpty())
+
+        assertNotNull(launchpads[0].name)
+    }
+
+    @Test
+    fun `launchpadsById returns launchpads (launch pad id is from allLaunchPads)`() {
+        val launchpads: List<LaunchPadDto> = clientV4.launchPads.getAll()
+
+        assertTrue(launchpads.isNotEmpty())
+
+        assertNotNull(launchpads[0].name)
+
+        val launchPadDto: LaunchPadDto = clientV4.launchPads.getById(launchpads[0].id)
+
+        assertNotNull(launchPadDto)
+        assertEquals(launchpads[0].name, launchPadDto.name)
+    }
+
+    @Test
+    fun `query launchpads test`() {
+        val pagination: PaginatedResponse<LaunchPadDto> = clientV4.launchPads.query(mapOf("limit" to 1))
 
         assertTrue(pagination.docs.isNotEmpty())
     }

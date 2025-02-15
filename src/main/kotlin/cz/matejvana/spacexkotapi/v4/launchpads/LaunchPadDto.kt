@@ -1,9 +1,7 @@
-package cz.matejvana.spacexkotapi.v4.landpads
-
 import com.fasterxml.jackson.annotation.JsonProperty
 import cz.matejvana.spacexkotapi.v4.Images
 
-data class LandingPadDto(
+data class LaunchPadDto(
     @JsonProperty("id")
     val id: String,
 
@@ -16,14 +14,14 @@ data class LandingPadDto(
     @JsonProperty("status")
     val status: String,
 
-    @JsonProperty("type")
-    val type: String? = null,
-
     @JsonProperty("locality")
     val locality: String? = null,
 
     @JsonProperty("region")
     val region: String? = null,
+
+    @JsonProperty("timezone")
+    val timezone: String? = null,
 
     @JsonProperty("latitude")
     val latitude: Double? = null,
@@ -31,21 +29,21 @@ data class LandingPadDto(
     @JsonProperty("longitude")
     val longitude: Double? = null,
 
-    @JsonProperty("landing_attempts")
-    val landingAttempts: Int = 0,
+    @JsonProperty("launch_attempts")
+    val launchAttempts: Int = 0,
 
-    @JsonProperty("landing_successes")
-    val landingSuccesses: Int = 0,
+    @JsonProperty("launch_successes")
+    val launchSuccesses: Int = 0,
 
-    @JsonProperty("wikipedia")
-    val wikipedia: String? = null,
-
-    @JsonProperty("details")
-    val details: String? = null,
+    @JsonProperty("rockets")
+    val rockets: List<String> = emptyList(),
 
     @JsonProperty("launches")
     val launches: List<String> = emptyList(),
 
     @JsonProperty("images")
-    val images: Images? = null
+    val images: Images? = null,
+
+    @JsonProperty("details")
+    val details: String? = null
 )

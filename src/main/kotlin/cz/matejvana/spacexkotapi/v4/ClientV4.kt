@@ -1,5 +1,6 @@
 package cz.matejvana.spacexkotapi.v4
 
+import LaunchPadDto
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import cz.matejvana.spacexkotapi.SpaceXClient
 import cz.matejvana.spacexkotapi.request.GetRequest
@@ -24,7 +25,10 @@ class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClie
     val crew = UniversalApi(this, prefix, "crew", objectMapper, CrewDto::class.java)
     val dragons = UniversalApi(this, prefix, "dragons", objectMapper, DragonDto::class.java)
     val history = UniversalApi(this, prefix, "history", objectMapper, HistoryDto::class.java)
-    val landpads = UniversalApi(this, prefix, "landpads", objectMapper, LandingPadDto::class.java)
+    val landPads = UniversalApi(this, prefix, "landpads", objectMapper, LandingPadDto::class.java)
+    val launchPads = UniversalApi(this, prefix, "launchpads", objectMapper, LaunchPadDto::class.java)
+
+    //todo launches
 
     fun check(): Boolean {
         val response = GetRequest(this).execute()
