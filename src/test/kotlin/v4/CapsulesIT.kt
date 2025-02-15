@@ -39,6 +39,28 @@ class CapsulesIT {
 
         val capsules = client.capsules.getAll()
         assertTrue(capsules.isNotEmpty())
+        assertEquals(2, capsules.size)
+        assertEquals("id", capsules[0].id)
+        assertEquals("serial", capsules[0].serial)
+        assertEquals("status", capsules[0].status)
+        assertEquals("type", capsules[0].type)
+        assertEquals("dragon", capsules[0].dragon)
+        assertEquals(1, capsules[0].reuseCount)
+        assertEquals(1, capsules[0].waterLandings)
+        assertEquals(1, capsules[0].landLandings)
+        assertEquals("lastUpdate", capsules[0].lastUpdate)
+        assertTrue(capsules[0].launches.isEmpty())
+
+        assertEquals("id2", capsules[1].id)
+        assertEquals("serial2", capsules[1].serial)
+        assertEquals("status2", capsules[1].status)
+        assertEquals("type2", capsules[1].type)
+        assertEquals("dragon2", capsules[1].dragon)
+        assertEquals(2, capsules[1].reuseCount)
+        assertEquals(2, capsules[1].waterLandings)
+        assertEquals(2, capsules[1].landLandings)
+        assertEquals("lastUpdate2", capsules[1].lastUpdate)
+        assertTrue(capsules[1].launches.isEmpty())
     }
 
     @Test
@@ -81,6 +103,15 @@ class CapsulesIT {
         val result = client.capsules.getById("id")
         assertNotNull(result)
         assertEquals("id", result.id)
+        assertEquals("serial", result.serial)
+        assertEquals("status", result.status)
+        assertEquals("type", result.type)
+        assertEquals("dragon", result.dragon)
+        assertEquals(1, result.reuseCount)
+        assertEquals(1, result.waterLandings)
+        assertEquals(1, result.landLandings)
+        assertEquals("lastUpdate", result.lastUpdate)
+        assertTrue(result.launches.isEmpty())
     }
 
     @Test
@@ -137,6 +168,26 @@ class CapsulesIT {
         val result = client.capsules.query(mapOf("limit" to 1))
         assertTrue(result.docs.isNotEmpty())
         assertEquals(1, result.totalDocs)
+        assertEquals(1, result.limit)
+        assertEquals(1, result.totalPages)
+        assertEquals(1, result.page)
+        assertEquals(1, result.pagingCounter)
+        assertFalse(result.hasPrevPage)
+        assertFalse(result.hasNextPage)
+        assertNull(result.prevPage)
+        assertNull(result.nextPage)
+        assertEquals(0, result.offset)
+        assertEquals(1, result.docs.size)
+        assertEquals("id", result.docs[0].id)
+        assertEquals("serial", result.docs[0].serial)
+        assertEquals("status", result.docs[0].status)
+        assertEquals("type", result.docs[0].type)
+        assertEquals("dragon", result.docs[0].dragon)
+        assertEquals(1, result.docs[0].reuseCount)
+        assertEquals(1, result.docs[0].waterLandings)
+        assertEquals(1, result.docs[0].landLandings)
+        assertEquals("lastUpdate", result.docs[0].lastUpdate)
+        assertTrue(result.docs[0].launches.isEmpty())
     }
 
     @Test
