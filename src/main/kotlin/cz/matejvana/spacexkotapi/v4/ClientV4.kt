@@ -9,6 +9,7 @@ import cz.matejvana.spacexkotapi.v4.cores.CoreDto
 import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
+import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
 import java.net.http.HttpClient
 
 class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
@@ -23,6 +24,7 @@ class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClie
     val crew = UniversalApi(this, prefix, "crew", objectMapper, CrewDto::class.java)
     val dragons = UniversalApi(this, prefix, "dragons", objectMapper, DragonDto::class.java)
     val history = UniversalApi(this, prefix, "history", objectMapper, HistoryDto::class.java)
+    val landpads = UniversalApi(this, prefix, "landpads", objectMapper, LandingPadDto::class.java)
 
     fun check(): Boolean {
         val response = GetRequest(this).execute()

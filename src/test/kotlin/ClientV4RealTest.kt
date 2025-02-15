@@ -5,6 +5,7 @@ import cz.matejvana.spacexkotapi.v4.cores.CoreDto
 import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
+import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -146,7 +147,7 @@ class ClientV4RealTest {
 
         assertTrue(pagination.docs.isNotEmpty())
     }
-    
+
     @Test
     fun `allHistory returns non-empty list of history`() {
         val history: List<HistoryDto> = clientV4.history.getAll()
@@ -173,6 +174,36 @@ class ClientV4RealTest {
     @Test
     fun `query history test`() {
         val pagination: PaginatedResponse<HistoryDto> = clientV4.history.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+
+    @Test
+    fun `allLandPads returns non-empty list of landpads`() {
+        val landpads: List<LandingPadDto> = clientV4.landpads.getAll()
+
+        assertTrue(landpads.isNotEmpty())
+
+        assertNotNull(landpads[0].name)
+    }
+
+    @Test
+    fun `landpadsById returns landingpads (landing pad id is from allLandPads)`() {
+        val landpads: List<LandingPadDto> = clientV4.landpads.getAll()
+
+        assertTrue(landpads.isNotEmpty())
+
+        assertNotNull(landpads[0].name)
+
+        val landingPadDto: LandingPadDto = clientV4.landpads.getById(landpads[0].id)
+
+        assertNotNull(landingPadDto)
+        assertEquals(landpads[0].name, landingPadDto.name)
+    }
+
+    @Test
+    fun `query landpads test`() {
+        val pagination: PaginatedResponse<LandingPadDto> = clientV4.landpads.query(mapOf("limit" to 1))
 
         assertTrue(pagination.docs.isNotEmpty())
     }
