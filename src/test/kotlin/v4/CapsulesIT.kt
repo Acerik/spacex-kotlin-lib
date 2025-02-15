@@ -1,3 +1,5 @@
+package v4
+
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
 import cz.matejvana.spacexkotapi.v4.ClientV4
 import cz.matejvana.spacexkotapi.v4.capsules.CapsuleDto
