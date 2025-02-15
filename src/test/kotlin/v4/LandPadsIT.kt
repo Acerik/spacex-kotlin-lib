@@ -7,7 +7,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlin.test.*
 
-class LandingPadIT {
+class LandPadsIT {
 
     @Test
     fun testAllLandingPadsSuccess() {
