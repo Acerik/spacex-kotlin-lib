@@ -3,6 +3,7 @@ import cz.matejvana.spacexkotapi.v4.ClientV4
 import cz.matejvana.spacexkotapi.v4.capsules.CapsuleDto
 import cz.matejvana.spacexkotapi.v4.cores.CoreDto
 import cz.matejvana.spacexkotapi.v4.crew.CrewDto
+import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
@@ -111,6 +112,36 @@ class ClientV4RealTest {
     @Test
     fun `query crew test`() {
         val pagination: PaginatedResponse<CrewDto> = clientV4.crew.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+
+    @Test
+    fun `allDragons returns non-empty list of dragons`() {
+        val dragons: List<DragonDto> = clientV4.dragons.getAll()
+
+        assertTrue(dragons.isNotEmpty())
+
+        assertNotNull(dragons[0].name)
+    }
+
+    @Test
+    fun `dragonById returns dragon (dragon id is from allDragons)`() {
+        val dragons: List<DragonDto> = clientV4.dragons.getAll()
+
+        assertTrue(dragons.isNotEmpty())
+
+        assertNotNull(dragons[0].name)
+
+        val dragon: DragonDto = clientV4.dragons.getById(dragons[0].id)
+
+        assertNotNull(dragon)
+        assertEquals(dragons[0].name, dragon.name)
+    }
+
+    @Test
+    fun `query dragon test`() {
+        val pagination: PaginatedResponse<DragonDto> = clientV4.dragons.query(mapOf("limit" to 1))
 
         assertTrue(pagination.docs.isNotEmpty())
     }
