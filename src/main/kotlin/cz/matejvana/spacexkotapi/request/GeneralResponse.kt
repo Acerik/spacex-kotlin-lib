@@ -1,6 +1,6 @@
 package cz.matejvana.spacexkotapi.request
 
-open class GenericResponse(
+open class GeneralResponse(
     var code: Int,
     var body: String
 )
