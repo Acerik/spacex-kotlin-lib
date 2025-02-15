@@ -52,11 +52,21 @@ jobs:
           jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
           badges-directory: .github/badges
 
-      - name: Push badges to repository
+      - name: Push badges to ci-results branch
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git pull origin main || echo "No changes to pull"
+          git checkout -b ci-results || echo "Branch ci-results already exists"
           git add .github/badges
           git commit -m 'Add JaCoCo coverage badges' || echo "No changes to commit"
-          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git HEAD:main
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git ci-results
+
+      - name: Push code changes to master
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout master
+          git pull origin master || echo "No changes to pull"
+          git add .
+          git commit -m 'Add code changes' || echo "No changes to commit"
+          git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git master
