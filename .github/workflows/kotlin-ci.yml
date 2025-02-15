@@ -57,10 +57,12 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git checkout -b ci-results || echo "Branch ci-results already exists"
+          git fetch origin ci-results
+          git rebase origin/ci-results || echo "No changes to rebase"
           git add .github/badges
           git commit -m 'Add JaCoCo coverage badges' || echo "No changes to commit"
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git ci-results
-
+      
       - name: Push code changes to master
         run: |
           git config --global user.name 'github-actions[bot]'
