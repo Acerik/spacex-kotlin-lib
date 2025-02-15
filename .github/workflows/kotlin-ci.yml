@@ -52,31 +52,28 @@ jobs:
           jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
           badges-directory: .github/badges
 
-      - name: Resolve conflicts automatically
+      - name: Resolve conflicts automatically and replace old file
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          
-          # Move untracked files to prevent overwriting
-          git clean -f .github/badges/jacoco.svg || echo "No untracked files to clean"
-          
+
           # Checkout the ci-results branch
           git fetch --all
           git checkout ci-results || git checkout -b ci-results
-          
-          # Pull the latest changes from ci-results to handle non-fast-forward errors
+
+          # Fetch the latest changes to avoid non-fast-forward errors
           git pull origin ci-results || echo "No changes to pull"
-          
-          # Resolve conflicts by taking the changes from ci-results branch (theirs)
-          git merge origin/ci-results --strategy=recursive --strategy-option=theirs || echo "No conflicts to resolve"
-          
-          # Stage and commit resolved conflicts
-          git add .
-          git commit -m "Merge conflicts resolved automatically" || echo "No changes to commit"
-          
+
+          # Delete the old jacoco.svg file before replacing it
+          rm -f .github/badges/jacoco.svg || echo "No old jacoco.svg file to remove"
+
+          # Stage and commit the new jacoco.svg file
+          git add .github/badges/jacoco.svg
+          git commit -m "Replace old jacoco.svg with new one"
+
           # Push to ci-results branch
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git ci-results
-     
+
 
       - name: Push code changes to master
         run: |
