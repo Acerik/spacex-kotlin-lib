@@ -52,30 +52,28 @@ jobs:
           jacoco-csv-file: build/reports/jacoco/test/jacocoTestReport.csv
           badges-directory: .github/badges
 
-      - name: Push badges to ci-results branch
+      - name: Resolve conflicts automatically
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          # Stash any untracked changes
-          git stash --include-untracked
+          # Checkout the branch
+          git checkout ci-results
 
-          # Create or checkout ci-results branch
-          git checkout ci-results || git checkout -b ci-results
+          # Fetch latest changes
+          git fetch origin
 
-          # Pull latest changes from remote ci-results
-          git pull origin ci-results --rebase || echo "No changes to pull"
+          # Resolve conflicts by taking the changes from ci-results branch (theirs)
+          git merge --strategy=recursive --strategy-option=theirs origin/ci-results
 
-          # Apply stashed changes
-          git stash pop || echo "No changes to apply"
+          # Stage and commit resolved conflicts
+          git add .
+          git commit -m "Merge conflicts resolved automatically"
 
-          # Add and commit the new badge
-          git add .github/badges
-          git commit -m 'Add JaCoCo coverage badges' || echo "No changes to commit"
-
-          # Push to remote ci-results branch
+          # Push to ci-results branch
           git push https://${{ secrets.GITHUB_TOKEN }}@github.com/Acerik/spacex-kot-api.git ci-results
-      
+
+
       - name: Push code changes to master
         run: |
           git config --global user.name 'github-actions[bot]'
