@@ -71,6 +71,9 @@ jobs:
           # Checkout ci-results branch, create it if it doesn't exist
           git checkout ci-results || git checkout -b ci-results
 
+          # Ensure the .github/badges/ directory exists
+          mkdir -p .github/badges
+
           # Remove the old jacoco.svg file before replacing it
           rm -f .github/badges/jacoco.svg || echo "No old jacoco.svg file to remove"
 
