@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "cz.matejvana"
-version = "0.1.1"
+version = "0.9.0"
 
 repositories {
     mavenCentral()
