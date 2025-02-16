@@ -312,4 +312,34 @@ class ClientV4RealTest {
 
         assertTrue(pagination.docs.isNotEmpty())
     }
+
+    @Test
+    fun `allShips returns non-empty list of ships`() {
+        val ships = clientV4.ships.getAll()
+
+        assertTrue(ships.isNotEmpty())
+
+        assertNotNull(ships[0].name)
+    }
+
+    @Test
+    fun `shipById returns ship (ship id is from allShips)`() {
+        val ships = clientV4.ships.getAll()
+
+        assertTrue(ships.isNotEmpty())
+
+        assertNotNull(ships[0].name)
+
+        val ship = clientV4.ships.getById(ships[0].id)
+
+        assertNotNull(ship)
+        assertEquals(ships[0].name, ship.name)
+    }
+
+    @Test
+    fun `query ships test`() {
+        val pagination = clientV4.ships.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
 }
