@@ -282,4 +282,34 @@ class ClientV4RealTest {
 
         assertNotNull(roadster)
     }
+
+    @Test
+    fun `allRockets returns non-empty list of rockets`() {
+        val rockets = clientV4.rockets.getAll()
+
+        assertTrue(rockets.isNotEmpty())
+
+        assertNotNull(rockets[0].name)
+    }
+
+    @Test
+    fun `rocketById returns rocket (rocket id is from allRockets)`() {
+        val rockets = clientV4.rockets.getAll()
+
+        assertTrue(rockets.isNotEmpty())
+
+        assertNotNull(rockets[0].name)
+
+        val rocket = clientV4.rockets.getById(rockets[0].id)
+
+        assertNotNull(rocket)
+        assertEquals(rockets[0].name, rocket.name)
+    }
+
+    @Test
+    fun `query rockets test`() {
+        val pagination = clientV4.rockets.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
 }
