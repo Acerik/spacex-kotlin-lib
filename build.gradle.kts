@@ -38,6 +38,7 @@ publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
+
             groupId = "cz.matejvana"
             artifactId = "spacex-kotlin-lib"
             version = "0.1.0"
@@ -50,7 +51,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/Acerik/spacex-kotlin-lib")
             credentials {
                 username = (project.findProperty("gpr.user") as? String) ?: System.getenv("GITHUB_ACTOR")
-                password = (project.findProperty("gpr.token") as? String) ?: System.getenv("GITHUB_TOKEN")
+                password = (project.findProperty("gpr.token") as? String) ?: System.getenv("TOKEN_GITHUB")
             }
         }
     }
