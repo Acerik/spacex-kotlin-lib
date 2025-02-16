@@ -4,8 +4,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "cz.matejvana"
-version = "0.9.0"
+group = "com.github.Acerik"
+version = "0.9.1"
 
 repositories {
     mavenCentral()
