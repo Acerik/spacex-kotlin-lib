@@ -47,8 +47,8 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/Acerik/spacex-kotlin-lib")
             credentials {
-                username = (project.findProperty("GH_ACTOR") as? String) ?: System.getenv("GH_ACTOR")
-                password = (project.findProperty("GH_TOKEN") as? String) ?: System.getenv("GH_TOKEN")
+                username = (project.findProperty("gpr.user") as? String) ?: System.getenv("GITHUB_ACTOR")
+                password = (project.findProperty("gpr.key") as? String) ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
