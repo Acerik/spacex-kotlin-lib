@@ -268,4 +268,18 @@ class ClientV4RealTest {
 
         assertTrue(pagination.docs.isNotEmpty())
     }
+
+    @Test
+    fun `roadster get returns roadster`() {
+        val roadster = clientV4.roadster.get()
+
+        assertNotNull(roadster)
+    }
+
+    @Test
+    fun `roadster query returns roadster`() {
+        val roadster = clientV4.roadster.query(mapOf("limit" to 1))
+
+        assertNotNull(roadster)
+    }
 }
