@@ -39,3 +39,6 @@ jobs:
         with:
           name: test-results
           path: build/reports/tests/test
+
+      - name: Run tests
+        run: ./gradlew test
