@@ -16,7 +16,7 @@ Add the following dependency to your `build.gradle.kts`:
 
 ```kotlin
 dependencies {
-    implementation("cz.matejvana:spacex-kot-api:1.0-SNAPSHOT")
+    implementation("cz.matejvana:spacex-kotlin-lib:1.0-SNAPSHOT")
 }
 ```
 
@@ -33,7 +33,7 @@ println(capsules)
 Check the build status in the GitHub repository badge above! We ensure the quality and reliability of the code by
 running continuous integration tests. Contributions to improve the project are always welcome!
 
-[![Build](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
+[![Build](https://github.com/Acerik/spacex-kotlin-lib/actions/workflows/kotlin-ci.yml/badge.svg)](https://github.com/Acerik/spacex-kot-api/actions/workflows/kotlin-ci.yml)
 
 Run tests with:
 
