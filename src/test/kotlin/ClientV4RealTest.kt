@@ -6,6 +6,8 @@ import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
 import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
+import cz.matejvana.spacexkotapi.v4.launches.LaunchV4Dto
+import cz.matejvana.spacexkotapi.v4.launches.LaunchV5Dto
 import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
@@ -369,6 +371,66 @@ class ClientV4RealTest {
     @Test
     fun `query starlink test`() {
         val pagination = clientV4.starlink.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+
+    @Test
+    fun `allLaunchesV4 returns non-empty list of launches`() {
+        val launches: List<LaunchV4Dto> = clientV4.launchesV4.getAll()
+
+        assertTrue(launches.isNotEmpty())
+
+        assertNotNull(launches[0].name)
+    }
+
+    @Test
+    fun `launchV4ById returns launch (launch id is from allLaunchesV4)`() {
+        val launches: List<LaunchV4Dto> = clientV4.launchesV4.getAll()
+
+        assertTrue(launches.isNotEmpty())
+
+        assertNotNull(launches[0].name)
+
+        val launch: LaunchV4Dto = clientV4.launchesV4.getById(launches[0].id)
+
+        assertNotNull(launch)
+        assertEquals(launches[0].name, launch.name)
+    }
+
+    @Test
+    fun `query launchesV4 test`() {
+        val pagination: PaginatedResponse<LaunchV4Dto> = clientV4.launchesV4.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
+
+    @Test
+    fun `allLaunchesV5 returns non-empty list of launches`() {
+        val launches: List<LaunchV5Dto> = clientV4.launchesV5.getAll()
+
+        assertTrue(launches.isNotEmpty())
+
+        assertNotNull(launches[0].name)
+    }
+
+    @Test
+    fun `launchV5ById returns launch (launch id is from allLaunchesV5)`() {
+        val launches: List<LaunchV5Dto> = clientV4.launchesV5.getAll()
+
+        assertTrue(launches.isNotEmpty())
+
+        assertNotNull(launches[0].name)
+
+        val launch: LaunchV5Dto = clientV4.launchesV5.getById(launches[0].id)
+
+        assertNotNull(launch)
+        assertEquals(launches[0].name, launch.name)
+    }
+
+    @Test
+    fun `query launchesV5 test`() {
+        val pagination: PaginatedResponse<LaunchV5Dto> = clientV4.launchesV5.query(mapOf("limit" to 1))
 
         assertTrue(pagination.docs.isNotEmpty())
     }

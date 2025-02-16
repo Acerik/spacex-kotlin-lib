@@ -11,6 +11,9 @@ import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
 import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
+import cz.matejvana.spacexkotapi.v4.launches.LaunchV4Dto
+import cz.matejvana.spacexkotapi.v4.launches.LaunchV5Dto
+import cz.matejvana.spacexkotapi.v4.launches.LaunchesApi
 import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import cz.matejvana.spacexkotapi.v4.roadster.RoadsterApi
 import cz.matejvana.spacexkotapi.v4.rockets.RocketDto
@@ -37,7 +40,8 @@ class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClie
     val rockets = UniversalApi(this, prefix, "rockets", objectMapper, RocketDto::class.java)
     val ships = UniversalApi(this, prefix, "ships", objectMapper, ShipDto::class.java)
     val starlink = UniversalApi(this, prefix, "starlink", objectMapper, StarlinkDto::class.java)
-    //todo launches
+    val launchesV4 = LaunchesApi(this, prefix, "launches", objectMapper, LaunchV4Dto::class.java)
+    val launchesV5 = LaunchesApi(this, "v5", "launches", objectMapper, LaunchV5Dto::class.java)
 
     fun check(): Boolean {
         val response = GetRequest(this).execute()

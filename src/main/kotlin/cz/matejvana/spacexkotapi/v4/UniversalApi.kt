@@ -6,7 +6,7 @@ import cz.matejvana.spacexkotapi.request.GetRequest
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
 import cz.matejvana.spacexkotapi.request.PostRequest
 
-class UniversalApi<T>(
+open class UniversalApi<T>(
     private val client: SpaceXClient,
     private val apiVersion: String,
     private val prefix: String,
