@@ -11,6 +11,7 @@ import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
 import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
+import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import java.net.http.HttpClient
 
 class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
@@ -27,6 +28,7 @@ class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClie
     val history = UniversalApi(this, prefix, "history", objectMapper, HistoryDto::class.java)
     val landPads = UniversalApi(this, prefix, "landpads", objectMapper, LandingPadDto::class.java)
     val launchPads = UniversalApi(this, prefix, "launchpads", objectMapper, LaunchPadDto::class.java)
+    val payloads = UniversalApi(this, prefix, "payloads", objectMapper, PayloadDto::class.java)
 
     //todo launches
 
