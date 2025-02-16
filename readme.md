@@ -23,7 +23,7 @@ repositories {
     maven { url = uri("https://jitpack.io") }
 }
 dependencies {
-    implementation("cz.matejvana:spacex-kotlin-lib:1.0.0")
+    implementation("com.github.Acerik:spacex-kotlin-lib:1.0.0")
 }
 ```
 
