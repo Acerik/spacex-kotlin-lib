@@ -1,10 +1,11 @@
 plugins {
     kotlin("jvm") version "2.0.20"
     id("jacoco")
+    id("maven-publish")
 }
 
 group = "cz.matejvana"
-version = "1.0-SNAPSHOT"
+version = "0.1.0"
 
 repositories {
     mavenCentral()
@@ -31,4 +32,26 @@ tasks.jacocoTestReport {
 }
 kotlin {
     jvmToolchain(21)
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "cz.matejvana"
+            artifactId = "spacex-kotlin-lib"
+            version = "0.1.0"
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Acerik/spacex-kotlin-lib")
+            credentials {
+                username = (project.findProperty("gpr.user") as? String) ?: System.getenv("GITHUB_ACTOR")
+                password = (project.findProperty("gpr.token") as? String) ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }
