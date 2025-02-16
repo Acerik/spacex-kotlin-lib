@@ -4,8 +4,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.github.Acerik"
-version = "0.9.1"
+group = "cz.matejvana"
+version = "0.9.2"
 
 repositories {
     mavenCentral()
@@ -44,12 +44,7 @@ publishing {
 
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Acerik/spacex-kotlin-lib")
-            credentials {
-                username = (project.findProperty("gpr.user") as? String) ?: System.getenv("GITHUB_ACTOR")
-                password = (project.findProperty("gpr.key") as? String) ?: System.getenv("GITHUB_TOKEN")
-            }
+            url = uri("https://jitpack.io")
         }
     }
 }
