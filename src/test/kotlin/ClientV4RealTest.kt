@@ -342,4 +342,34 @@ class ClientV4RealTest {
 
         assertTrue(pagination.docs.isNotEmpty())
     }
+
+    @Test
+    fun `allStarlink returns non-empty list of starlinks`() {
+        val starlinks = clientV4.starlink.getAll()
+
+        assertTrue(starlinks.isNotEmpty())
+
+        assertNotNull(starlinks[0].version)
+    }
+
+    @Test
+    fun `starlinkById returns starlink (starlink id is from allStarlink)`() {
+        val starlinks = clientV4.starlink.getAll()
+
+        assertTrue(starlinks.isNotEmpty())
+
+        assertNotNull(starlinks[0].version)
+
+        val starlink = clientV4.starlink.getById(starlinks[0].id)
+
+        assertNotNull(starlink)
+        assertEquals(starlinks[0].version, starlink.version)
+    }
+
+    @Test
+    fun `query starlink test`() {
+        val pagination = clientV4.starlink.query(mapOf("limit" to 1))
+
+        assertTrue(pagination.docs.isNotEmpty())
+    }
 }

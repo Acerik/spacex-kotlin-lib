@@ -15,6 +15,7 @@ import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import cz.matejvana.spacexkotapi.v4.roadster.RoadsterApi
 import cz.matejvana.spacexkotapi.v4.rockets.RocketDto
 import cz.matejvana.spacexkotapi.v4.ships.ShipDto
+import cz.matejvana.spacexkotapi.v4.starlink.StarlinkDto
 import java.net.http.HttpClient
 
 class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
@@ -35,6 +36,7 @@ class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClie
     val roadster = RoadsterApi(this, prefix, objectMapper)
     val rockets = UniversalApi(this, prefix, "rockets", objectMapper, RocketDto::class.java)
     val ships = UniversalApi(this, prefix, "ships", objectMapper, ShipDto::class.java)
+    val starlink = UniversalApi(this, prefix, "starlink", objectMapper, StarlinkDto::class.java)
     //todo launches
 
     fun check(): Boolean {
