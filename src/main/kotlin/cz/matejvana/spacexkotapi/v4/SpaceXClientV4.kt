@@ -1,6 +1,5 @@
 package cz.matejvana.spacexkotapi.v4
 
-import LaunchPadDto
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import cz.matejvana.spacexkotapi.SpaceXClient
 import cz.matejvana.spacexkotapi.request.GetRequest
@@ -14,6 +13,7 @@ import cz.matejvana.spacexkotapi.v4.landpads.LandingPadDto
 import cz.matejvana.spacexkotapi.v4.launches.LaunchV4Dto
 import cz.matejvana.spacexkotapi.v4.launches.LaunchV5Dto
 import cz.matejvana.spacexkotapi.v4.launches.LaunchesApi
+import cz.matejvana.spacexkotapi.v4.launchpads.LaunchPadDto
 import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import cz.matejvana.spacexkotapi.v4.roadster.RoadsterApi
 import cz.matejvana.spacexkotapi.v4.rockets.RocketDto
@@ -21,7 +21,7 @@ import cz.matejvana.spacexkotapi.v4.ships.ShipDto
 import cz.matejvana.spacexkotapi.v4.starlink.StarlinkDto
 import java.net.http.HttpClient
 
-class ClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
+class SpaceXClientV4(httpClient: HttpClient = HttpClient.newHttpClient()) : SpaceXClient(httpClient) {
 
 
     private val objectMapper = jacksonObjectMapper()

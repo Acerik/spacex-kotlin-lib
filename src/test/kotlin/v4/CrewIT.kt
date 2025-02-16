@@ -1,7 +1,7 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.crew.CrewDto
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +11,7 @@ class CrewIT {
 
     @Test
     fun testAllCrewSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.getAll() } returns listOf(
             CrewDto(
                 "id",
@@ -55,7 +55,7 @@ class CrewIT {
 
     @Test
     fun testAllCrewInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -65,7 +65,7 @@ class CrewIT {
 
     @Test
     fun testAllCrew400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -75,7 +75,7 @@ class CrewIT {
 
     @Test
     fun testCrewByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val crewMember = CrewDto(
             "id",
             "name",
@@ -100,7 +100,7 @@ class CrewIT {
 
     @Test
     fun testCrewByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -110,7 +110,7 @@ class CrewIT {
 
     @Test
     fun testCrewById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -120,7 +120,7 @@ class CrewIT {
 
     @Test
     fun testQueryCrewSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 CrewDto(
@@ -170,7 +170,7 @@ class CrewIT {
 
     @Test
     fun testQueryCrewInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -180,7 +180,7 @@ class CrewIT {
 
     @Test
     fun testQueryCrew400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.crew.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

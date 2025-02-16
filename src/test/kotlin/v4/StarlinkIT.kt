@@ -1,6 +1,6 @@
 package v4
 
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.starlink.StarlinkDto
 import io.mockk.every
 import io.mockk.mockk
@@ -10,7 +10,7 @@ class StarlinkIT {
 
     @Test
     fun testGetAllStarlink() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.starlink.getAll() } returns listOf(
             StarlinkDto(
                 id = "id1",
@@ -128,7 +128,7 @@ class StarlinkIT {
 
     @Test
     fun testGetAllStarlinkInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.starlink.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -138,7 +138,7 @@ class StarlinkIT {
 
     @Test
     fun testGetAllStarlink400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.starlink.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -148,7 +148,7 @@ class StarlinkIT {
 
     @Test
     fun testGetStarlinkByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val starlink = StarlinkDto(
             id = "id",
             version = "v0.9",
@@ -264,7 +264,7 @@ class StarlinkIT {
 
     @Test
     fun testGetStarlinkByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.starlink.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -274,7 +274,7 @@ class StarlinkIT {
 
     @Test
     fun testGetStarlinkById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.starlink.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

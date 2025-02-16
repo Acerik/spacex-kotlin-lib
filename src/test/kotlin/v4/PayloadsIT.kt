@@ -1,7 +1,7 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.payloads.PayloadDto
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +11,7 @@ class PayloadsIT {
 
     @Test
     fun testAllPayloadsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.getAll() } returns listOf(
             PayloadDto(
                 "id",
@@ -133,7 +133,7 @@ class PayloadsIT {
 
     @Test
     fun testAllPayloadsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -143,7 +143,7 @@ class PayloadsIT {
 
     @Test
     fun testAllPayloads400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -153,7 +153,7 @@ class PayloadsIT {
 
     @Test
     fun testPayloadByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val payload = PayloadDto(
             "id",
             "name",
@@ -215,8 +215,9 @@ class PayloadsIT {
         assertFalse(result.dragon?.landLanding == true)
     }
 
+    @Test
     fun testPayloadByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -226,7 +227,7 @@ class PayloadsIT {
 
     @Test
     fun testPayloadById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -236,7 +237,7 @@ class PayloadsIT {
 
     @Test
     fun testQueryPayloadsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 PayloadDto(
@@ -325,7 +326,7 @@ class PayloadsIT {
 
     @Test
     fun testQueryPayloadsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -335,7 +336,7 @@ class PayloadsIT {
 
     @Test
     fun testQueryPayloads400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.payloads.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

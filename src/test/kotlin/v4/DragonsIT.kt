@@ -1,7 +1,7 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.dragons.DragonDto
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +11,7 @@ class DragonsIT {
 
     @Test
     fun testAllDragonsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.getAll() } returns listOf(
             DragonDto(
                 "id",
@@ -141,7 +141,7 @@ class DragonsIT {
 
     @Test
     fun testAllDragonsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -151,7 +151,7 @@ class DragonsIT {
 
     @Test
     fun testAllDragons400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -161,7 +161,7 @@ class DragonsIT {
 
     @Test
     fun testDragonByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val dragon = DragonDto(
             "id",
             "name",
@@ -229,7 +229,7 @@ class DragonsIT {
 
     @Test
     fun testDragonByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -239,7 +239,7 @@ class DragonsIT {
 
     @Test
     fun testDragonById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -249,7 +249,7 @@ class DragonsIT {
 
     @Test
     fun testQueryDragonsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 DragonDto(
@@ -342,7 +342,7 @@ class DragonsIT {
 
     @Test
     fun testQueryDragonsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -352,7 +352,7 @@ class DragonsIT {
 
     @Test
     fun testQueryDragons400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.dragons.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

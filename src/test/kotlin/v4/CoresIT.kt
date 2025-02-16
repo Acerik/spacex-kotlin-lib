@@ -1,17 +1,17 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.cores.CoreDto
 import io.mockk.every
 import io.mockk.mockk
 import kotlin.test.*
-    
+
 class CoresIT {
 
     @Test
     fun testGetAllCores() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.getAll() } returns listOf(
             CoreDto("id1", "serial1", 1, "active", 0, 0, 0, 0, 0, "update", listOf()),
             CoreDto("id2", "serial2", 2, "inactive", 1, 1, 1, 1, 1, "update2", listOf())
@@ -47,7 +47,7 @@ class CoresIT {
 
     @Test
     fun testGetAllCoresInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -57,7 +57,7 @@ class CoresIT {
 
     @Test
     fun testGetAllCores400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -67,7 +67,7 @@ class CoresIT {
 
     @Test
     fun testGetCoreByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val core = CoreDto("id", "serial", 1, "active", 0, 0, 0, 0, 0, "update", listOf())
         every { client.cores.getById("id") } returns core
 
@@ -88,7 +88,7 @@ class CoresIT {
 
     @Test
     fun testGetCoreByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -98,7 +98,7 @@ class CoresIT {
 
     @Test
     fun testGetCoreById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -108,7 +108,7 @@ class CoresIT {
 
     @Test
     fun testQueryCoresSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 CoreDto("id", "serial", 1, "active", 0, 0, 0, 0, 0, "update", listOf())
@@ -154,7 +154,7 @@ class CoresIT {
 
     @Test
     fun testQueryCoresInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -164,7 +164,7 @@ class CoresIT {
 
     @Test
     fun testQueryCores400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.cores.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

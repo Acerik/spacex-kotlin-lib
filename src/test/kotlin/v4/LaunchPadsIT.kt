@@ -1,9 +1,9 @@
 package v4
 
-import LaunchPadDto
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
 import cz.matejvana.spacexkotapi.v4.Images
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
+import cz.matejvana.spacexkotapi.v4.launchpads.LaunchPadDto
 import io.mockk.every
 import io.mockk.mockk
 import kotlin.test.*
@@ -12,7 +12,7 @@ class LaunchPadsIT {
 
     @Test
     fun testAllLaunchPadsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.getAll() } returns listOf(
             LaunchPadDto(
                 "id",
@@ -88,7 +88,7 @@ class LaunchPadsIT {
 
     @Test
     fun testAllLaunchPadsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -98,7 +98,7 @@ class LaunchPadsIT {
 
     @Test
     fun testAllLaunchPads400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -108,7 +108,7 @@ class LaunchPadsIT {
 
     @Test
     fun testLaunchPadByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val launchPad = LaunchPadDto(
             "id",
             "name",
@@ -149,7 +149,7 @@ class LaunchPadsIT {
 
     @Test
     fun testLaunchPadByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -159,7 +159,7 @@ class LaunchPadsIT {
 
     @Test
     fun testLaunchPadById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -169,7 +169,7 @@ class LaunchPadsIT {
 
     @Test
     fun testQueryLaunchPadsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 LaunchPadDto(
@@ -235,7 +235,7 @@ class LaunchPadsIT {
 
     @Test
     fun testQueryLaunchPadsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -245,7 +245,7 @@ class LaunchPadsIT {
 
     @Test
     fun testQueryLaunchPads400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchPads.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

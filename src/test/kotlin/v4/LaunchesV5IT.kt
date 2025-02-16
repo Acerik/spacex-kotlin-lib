@@ -1,7 +1,7 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.launches.LaunchV5Dto
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +11,7 @@ class LaunchesV5IT {
 
     @Test
     fun testAllLaunchesV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchesV5.getAll() } returns listOf(
             LaunchV5Dto(
                 id = "id",
@@ -53,7 +53,7 @@ class LaunchesV5IT {
 
     @Test
     fun testLaunchV5ByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val launch = LaunchV5Dto(
             id = "id",
             flightNumber = 1,
@@ -93,7 +93,7 @@ class LaunchesV5IT {
 
     @Test
     fun testQueryLaunchesV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 LaunchV5Dto(
@@ -158,7 +158,7 @@ class LaunchesV5IT {
 
     @Test
     fun testLatestLaunchV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val launch = LaunchV5Dto(
             id = "id",
             flightNumber = 1,
@@ -198,7 +198,7 @@ class LaunchesV5IT {
 
     @Test
     fun testNextLaunchV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val launch = LaunchV5Dto(
             id = "id",
             flightNumber = 1,
@@ -238,7 +238,7 @@ class LaunchesV5IT {
 
     @Test
     fun testPastLaunchesV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchesV5.past() } returns listOf(
             LaunchV5Dto(
                 id = "id",
@@ -280,7 +280,7 @@ class LaunchesV5IT {
 
     @Test
     fun testUpcomingLaunchesV5Success() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.launchesV5.upcoming() } returns listOf(
             LaunchV5Dto(
                 id = "id",

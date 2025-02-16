@@ -1,5 +1,5 @@
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.rockets.RocketDto
 import io.mockk.every
 import io.mockk.mockk
@@ -9,7 +9,7 @@ class RocketsIT {
 
     @Test
     fun testGetAllRockets() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.getAll() } returns listOf(
             RocketDto(
                 "id1",
@@ -178,7 +178,7 @@ class RocketsIT {
 
     @Test
     fun testGetAllRocketsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -188,7 +188,7 @@ class RocketsIT {
 
     @Test
     fun testGetAllRockets400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -198,7 +198,7 @@ class RocketsIT {
 
     @Test
     fun testGetRocketByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val rocket = RocketDto(
             "id",
             "Falcon 1",
@@ -312,7 +312,7 @@ class RocketsIT {
 
     @Test
     fun testGetRocketByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -322,7 +322,7 @@ class RocketsIT {
 
     @Test
     fun testGetRocketById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -332,7 +332,7 @@ class RocketsIT {
 
     @Test
     fun testQueryRocketsSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 RocketDto(
@@ -471,7 +471,7 @@ class RocketsIT {
 
     @Test
     fun testQueryRocketsInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -481,7 +481,7 @@ class RocketsIT {
 
     @Test
     fun testQueryRockets400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.rockets.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

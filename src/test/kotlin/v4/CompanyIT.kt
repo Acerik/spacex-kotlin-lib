@@ -1,6 +1,6 @@
 package v4
 
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.company.CompanyDto
 import io.mockk.every
 import io.mockk.mockk
@@ -13,7 +13,7 @@ class CompanyIT {
 
     @Test
     fun testAllCompaniesSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.company.getAllInfo() } returns
                 CompanyDto(
                     "5eb75edc42fea42237d7f3f4",
@@ -66,7 +66,7 @@ class CompanyIT {
 
     @Test
     fun testAllCompaniesInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.company.getAllInfo() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -76,7 +76,7 @@ class CompanyIT {
 
     @Test
     fun testAllCompanies400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.company.getAllInfo() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

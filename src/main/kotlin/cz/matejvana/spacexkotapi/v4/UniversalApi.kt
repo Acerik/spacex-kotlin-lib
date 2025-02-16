@@ -13,7 +13,11 @@ open class UniversalApi<T>(
     private val objectMapper: ObjectMapper,
     private val dtoClass: Class<T>
 ) {
-
+    /**
+     * Retrieves all items.
+     *
+     * @return A list of items.
+     */
     fun getAll(): List<T> {
         val response = GetRequest(client)
             .append(apiVersion)
@@ -25,6 +29,12 @@ open class UniversalApi<T>(
         )
     }
 
+    /**
+     * Retrieves an item by its ID.
+     *
+     * @param id The unique identifier of the item.
+     * @return The item.
+     */
     fun getById(id: String): T {
         val response = GetRequest(client)
             .append(apiVersion)
@@ -34,6 +44,12 @@ open class UniversalApi<T>(
         return objectMapper.readValue(response.body, dtoClass)
     }
 
+    /**
+     * Queries items  based on the provided query parameters.
+     *
+     * @param query A map of query parameters.
+     * @return A paginated response containing items.
+     */
     fun query(query: Map<String, Any>): PaginatedResponse<T> {
         val response = PostRequest(client)
             .setBody(objectMapper.writeValueAsString(query))

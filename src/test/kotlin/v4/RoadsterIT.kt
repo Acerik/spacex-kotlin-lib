@@ -1,6 +1,6 @@
 package v4
 
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.roadster.RoadsterDto
 import io.mockk.every
 import io.mockk.mockk
@@ -13,7 +13,7 @@ class RoadsterIT {
 
     @Test
     fun testGetRoadster() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val roadster = RoadsterDto(
             id = "1",
             name = "Tesla Roadster",
@@ -53,7 +53,7 @@ class RoadsterIT {
 
     @Test
     fun testGetRoadsterInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.roadster.get() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -63,7 +63,7 @@ class RoadsterIT {
 
     @Test
     fun testGetRoadster400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.roadster.get() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -73,7 +73,7 @@ class RoadsterIT {
 
     @Test
     fun testQueryRoadsterSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val roadster = RoadsterDto(
             id = "1",
             name = "Tesla Roadster",
@@ -113,7 +113,7 @@ class RoadsterIT {
 
     @Test
     fun testQueryRoadsterInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.roadster.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -123,7 +123,7 @@ class RoadsterIT {
 
     @Test
     fun testQueryRoadster400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.roadster.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

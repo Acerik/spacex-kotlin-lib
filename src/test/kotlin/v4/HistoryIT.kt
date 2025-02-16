@@ -1,7 +1,7 @@
 package v4
 
 import cz.matejvana.spacexkotapi.request.PaginatedResponse
-import cz.matejvana.spacexkotapi.v4.ClientV4
+import cz.matejvana.spacexkotapi.v4.SpaceXClientV4
 import cz.matejvana.spacexkotapi.v4.history.HistoryDto
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +11,7 @@ class HistoryIT {
 
     @Test
     fun testAllHistorySuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.getAll() } returns listOf(
             HistoryDto(
                 "id",
@@ -51,7 +51,7 @@ class HistoryIT {
 
     @Test
     fun testAllHistoryInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.getAll() } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -61,7 +61,7 @@ class HistoryIT {
 
     @Test
     fun testAllHistory400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.getAll() } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -71,7 +71,7 @@ class HistoryIT {
 
     @Test
     fun testHistoryByIdSuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val historyItem = HistoryDto(
             "id",
             "title",
@@ -94,7 +94,7 @@ class HistoryIT {
 
     @Test
     fun testHistoryByIdInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.getById("id") } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -104,7 +104,7 @@ class HistoryIT {
 
     @Test
     fun testHistoryById400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.getById("id") } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {
@@ -114,7 +114,7 @@ class HistoryIT {
 
     @Test
     fun testQueryHistorySuccess() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         val paginatedResponse = PaginatedResponse(
             docs = listOf(
                 HistoryDto(
@@ -162,7 +162,7 @@ class HistoryIT {
 
     @Test
     fun testQueryHistoryInternetFailure() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.query(any()) } throws RuntimeException("Internet connection error")
 
         assertFailsWith<RuntimeException> {
@@ -172,7 +172,7 @@ class HistoryIT {
 
     @Test
     fun testQueryHistory400StatusCode() {
-        val client = mockk<ClientV4>()
+        val client = mockk<SpaceXClientV4>()
         every { client.history.query(any()) } throws RuntimeException("HTTP 400 Bad Request")
 
         assertFailsWith<RuntimeException> {

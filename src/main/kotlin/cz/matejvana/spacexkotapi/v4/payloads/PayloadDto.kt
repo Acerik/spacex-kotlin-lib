@@ -2,8 +2,39 @@ package cz.matejvana.spacexkotapi.v4.payloads
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
+/**
+ * Data class representing a payload in the SpaceX API.
+ *
+ * @property id The unique identifier of the payload.
+ * @property name The name of the payload.
+ * @property type The type of the payload.
+ * @property reused Indicates if the payload is reused.
+ * @property launch The launch identifier associated with the payload.
+ * @property customers The list of customers for the payload.
+ * @property noradIds The list of NORAD IDs associated with the payload.
+ * @property nationalities The list of nationalities associated with the payload.
+ * @property manufacturers The list of manufacturers of the payload.
+ * @property massKg The mass of the payload in kilograms.
+ * @property massLbs The mass of the payload in pounds.
+ * @property orbit The orbit of the payload.
+ * @property referenceSystem The reference system of the payload's orbit.
+ * @property regime The regime of the payload's orbit.
+ * @property longitude The longitude of the payload's orbit.
+ * @property semiMajorAxisKm The semi-major axis of the payload's orbit in kilometers.
+ * @property eccentricity The eccentricity of the payload's orbit.
+ * @property periapsisKm The periapsis of the payload's orbit in kilometers.
+ * @property apoapsisKm The apoapsis of the payload's orbit in kilometers.
+ * @property inclinationDeg The inclination of the payload's orbit in degrees.
+ * @property periodMin The period of the payload's orbit in minutes.
+ * @property lifespanYears The expected lifespan of the payload in years.
+ * @property epoch The epoch of the payload's orbit.
+ * @property meanMotion The mean motion of the payload's orbit.
+ * @property raan The right ascension of the ascending node of the payload's orbit.
+ * @property argOfPericenter The argument of pericenter of the payload's orbit.
+ * @property meanAnomaly The mean anomaly of the payload's orbit.
+ * @property dragon The Dragon-specific details of the payload.
+ */
 data class PayloadDto(
-
     @JsonProperty("id")
     val id: String,
 
@@ -88,8 +119,18 @@ data class PayloadDto(
     @JsonProperty("dragon")
     val dragon: Dragon? = null
 ) {
+    /**
+     * Data class representing Dragon-specific details of the payload.
+     *
+     * @property capsule The capsule identifier.
+     * @property massReturnedKg The mass returned by the Dragon capsule in kilograms.
+     * @property massReturnedLbs The mass returned by the Dragon capsule in pounds.
+     * @property flightTimeSec The flight time of the Dragon capsule in seconds.
+     * @property manifest The manifest of the Dragon capsule.
+     * @property waterLanding Indicates if the Dragon capsule landed in water.
+     * @property landLanding Indicates if the Dragon capsule landed on land.
+     */
     data class Dragon(
-
         @JsonProperty("capsule")
         val capsule: String? = null,
 
