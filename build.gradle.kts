@@ -51,7 +51,7 @@ publishing {
             url = uri("https://maven.pkg.github.com/Acerik/spacex-kotlin-lib")
             credentials {
                 username = (project.findProperty("gpr.user") as? String) ?: System.getenv("GITHUB_ACTOR")
-                password = (project.findProperty("gpr.token") as? String) ?: System.getenv("TOKEN_GITHUB")
+                password = (project.findProperty("gpr.token") as? String) ?: System.getenv("GITHUB_TOKEN")
             }
         }
     }
